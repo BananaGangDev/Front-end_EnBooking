@@ -1,0 +1,52 @@
+.timeschedule{
+    display: flex;
+    flex-direction: row;
+    color: #fff;
+}
+.dateTime{
+    font-size: 1.5em;
+    color: #fff;
+    background-color: #263959;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 1.3em 20px 10px;
+    border-radius: 15px; 
+}
+.detailBooking{
+
+}
+.timeBooking{
+    display: flex;
+    flex-direction: row;
+    margin-top: 10px;
+}
+.formID{
+    margin-bottom: 1.5em;
+}
+.idInput{
+    width: 20em;
+    background-color: #EFEFEF;
+    border-radius: 1em;
+    border: 0;
+}
+.footer{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    color: #999999;
+}
+label.studentId{
+    font-size: 1.2em;
+}
+.note{
+    margin: 4px;
+}
+
+button.confirmButton{
+    background-color: #263959;
+    color: #fff;
+    width: 8em;
+    font-size: 1em;
+}
