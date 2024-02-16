@@ -15,7 +15,7 @@
     border-radius: 15px; 
 }
 .detailBooking{
-
+    
 }
 .timeBooking{
     display: flex;
@@ -24,21 +24,19 @@
 }
 .formID{
     margin-bottom: 1.5em;
+    display: flex;
+    
 }
-.idInput{
-    width: 20em;
-    background-color: #EFEFEF;
-    border-radius: 1em;
-    border: 0;
+.fieldID{
+    width: 100%;
+    font-size: 3em;
+
 }
 .footer{
     display: flex;
     justify-content: center;
     flex-direction: column;
     color: #999999;
-}
-label.studentId{
-    font-size: 1.2em;
 }
 .note{
     margin: 4px;

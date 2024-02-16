@@ -15,10 +15,14 @@ import MuiFormControl, { useFormControl } from "@mui/material/FormControl";
 import OutlinedInput from '@mui/material/OutlinedInput';
 import FormHelperText from '@mui/material/FormHelperText';
 import Button from '@mui/material/Button';
+import Successful from '../components/successBooking';
+import Unsuccessful from '../components/unsuccessBooking';
 
 
 
 function BookingID() {
+
+    const studentID = [4];
 
   return (
     <>
@@ -49,39 +53,47 @@ function BookingID() {
         </div>
         <div className="container center">
             <div className="formID centerHorizontal">
-                <form>
-                <label className='studentId'>Host Id</label><br/>
-                <form noValidate autoComplete="off">
-                    <FormControl  >
-                        <OutlinedInput type='number' placeholder="Student Id ..." />
-                    </FormControl>
-                </form>
+                <form >
+                <TextField
+                    id="filled-read-only-input"
+                    className = "fieldID"
+                    label="Host Id"
+                    defaultValue="641074xx"
+                    InputProps={{
+                        readOnly: true,
+                    }}
+                    variant="filled"
+                    margin="dense"
+                />
 
                 <hr/>
-                <label className='studentId'>Student Id No.1</label><br/>
-                <form noValidate autoComplete="off">
-                    <FormControl 
-                        className='idInput' 
-                        >
-                        <OutlinedInput type='number' placeholder="Student Id ..." />
-                    </FormControl>
-                </form>
-                <label className='studentId'>Student Id No.2</label><br/>
-                <form noValidate autoComplete="off">
-                    <FormControl 
-                        className='idInput'
-                        >
-                        <OutlinedInput type='number' placeholder="Student Id ..." />
-                    </FormControl>
-                </form>
-                <label className='studentId'>Student Id No.3</label><br/>
-                <form noValidate autoComplete="off">
-                    <FormControl 
-                        className='idInput'
-                        >
-                        <OutlinedInput label="Filled" type='number' placeholder="Student Id ..." />
-                    </FormControl>
-                </form>
+                
+                    <TextField
+                        id="filled-search"
+                        className = "fieldID"
+                        label="Student Id No.1"
+                        type="number"
+                        variant="filled"
+                        margin="dense"
+                    />
+                    <TextField
+                        id="filled-search"
+                        className = "fieldID"
+                        label="Student Id No.2"
+                        type="number"
+                        variant="filled"
+                        margin="dense"
+
+                    />
+                    <TextField
+                        id="filled-search"
+                        className = "fieldID"
+                        label="Student Id No.3"
+                        type="number"
+                        variant="filled"
+                        margin="dense"
+                        
+                    />
             </form>
             </div>
 
@@ -108,7 +120,7 @@ function BookingID() {
 
             
         </div>
-        
+        <Unsuccessful trigger={false}/>
         
     </>
   )

@@ -3,6 +3,7 @@ import { useState } from 'react'
 import BookIcon from '../assets/bookWhite.png'
 import ControlPointIcon from '@mui/icons-material/ControlPoint';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import Successful from '../components/successBooking';
 
 
 function Booking() {
