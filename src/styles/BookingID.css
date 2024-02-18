@@ -1,21 +1,48 @@
 .timeschedule{
-    display: flex;
-    flex-direction: row;
     color: #fff;
+    margin-bottom: 1em;
+    
 }
-.dateTime{
+.cardDate{
+    margin-right: 0.5em;
+}
+.dateTime {
     font-size: 1.5em;
-    color: #fff;
-    background-color: #263959;
-    padding: 15px;
+    width: 3em;
+    color: #000000;
+    background-color: #D9D9D9;
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin: 0 1.3em 20px 10px;
+    justify-content: center;
+    padding: 0.8em 0.4em 0.8em 0.4em;
     border-radius: 15px; 
 }
+.choosed,.choosed .month, .choosed .date{
+    background-color: #263959;
+    color: #fff;
+}
+.day{
+    color: #fff;
+    font-weight: light;
+}
+.date{
+    font-size: 1.2em;
+}
+.month{
+    color: #6D6D6D;
+    font-size: 0.8em;
+}
 .detailBooking{
+    font-size: 1.05em;
+    margin-left: 2em;
+}
+.locationName{
+    padding-left: 1em;
     
+}
+.timeBooking-detail{
+    margin-left: 1em;
 }
 .timeBooking{
     display: flex;
@@ -25,12 +52,21 @@
 .formID{
     margin-bottom: 1.5em;
     display: flex;
+    gap: 1em;
+    justify-content: center;
+    
     
 }
-.fieldID{
-    width: 100%;
-    font-size: 3em;
-
+hr{
+    margin-top: 1em;
+    margin-bottom: 2em;
+}
+.friendId{
+    gap: 1em;
+}
+.stuID{
+    width: 6em;
+    height: 1em;    
 }
 .footer{
     display: flex;
@@ -39,12 +75,12 @@
     color: #999999;
 }
 .note{
-    margin: 4px;
+    margin: 7px;
 }
 
 button.confirmButton{
     background-color: #263959;
     color: #fff;
     width: 8em;
-    font-size: 1em;
+    font-size: 1.3em;
 }

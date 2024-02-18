@@ -1,3 +1,8 @@
+.popupDisplay{
+    position: relative;
+    z-index: 1;
+    top : -4em;
+}
 .popup{
     position: fixed;
     top: 0;
@@ -11,30 +16,22 @@
 
 }
 .popup-inner { 
-    position:relative;
     padding: 32px;
-    width: 100%;
     max-width: 640px; 
     background-color: #ffff ;
     display: flex;
     justify-content: center; 
-    align-items: center;
+    flex-direction: column;
 
 }
-.popup-inner .close-btn {
-    position:absolute;
+.closed-btn {
+    /* position:absolute;
     top: 16px; 
-    right: 16px;
-    width: 1.5em;
-    height: 1.5em;
+    right: 16px; */
+    width: 2em;
+    height: 2em;
 }
 .imagePopup{
     height: 10em;
     width: 10em;
-}
-.popupDetail{
-    display: flex;
-    
-    justify-content: center; 
-    align-items: center;
 }

@@ -13,16 +13,25 @@
     height: 80px;
     width: auto;
 }
+.calendar{
+    position: relative;
+    z-index: 2;
+    margin-left: 2em;
+}
+.schedule{
+    position: relative;
+    z-index: 1;
+    top : -3em;
+}
 .container{
     color: black;
-    background-color: #fff;
+    background-color: #ffffff;
     border-top-left-radius: 3em;
     padding: 4em 2em 2em 2em;
-
-    
+    position: relative;    
 }
 .subtitle{
-    font-size: 2em;
+    font-size: 1.7em;
 }
 .timeslot{
     background-color: #D9D9D9;
@@ -31,12 +40,12 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    padding: 6px 25px 6px 25px;
+    padding: 13px 25px 13px 25px;
     margin-top: 1.5em;
 }
 .bookingtime{
-    font-size: 1.9em;
+    font-size: 1.5em;
 }
 .confirmtime{
-    font-size: 1.2em;
+    font-size: 1.15em;
 }
