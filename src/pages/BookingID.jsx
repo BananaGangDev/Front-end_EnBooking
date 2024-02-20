@@ -17,32 +17,40 @@ import FormHelperText from '@mui/material/FormHelperText';
 import Button from '@mui/material/Button';
 import { BrowserRouter as Router, NavLink } from "react-router-dom";
 import Alert from '../components/Alert'
-import axios from "axios";
 import api from '../api'
 
 
 
-function BookingID(props) {
-    /*
-    To do 
-    1. sent studentID
-    */
+function BookingID() {
+    // GET HOST ID
+    const userArray = ["Obaseki",25]
+    // localStorage.setItem('user', JSON.stringify(userArray));
 
-    const [transactions, setTransactios] =  useState([]);
+    const [transactions, setTransactions] =  useState([]);
     const [formData, setFormData] = useState(
         {
-            host_id: 0,
+            host_id: '1234',
             timestamp: '',
-            period: '',
-            friend_id1: 0,
-            friend_id2: 0,
-            friend_id3: 0,
+            friend_id1: '',
+            friend_id2: '',
+            friend_id3: '',
           });
 
-    const [studentId, setStudentId] = useState(['6410742362','', '', '']);
+    // useEffect(() => {
+    //     const fetchHostId = async () => {
+    //         try {
+    //             const response = await api.get(`/signup/get_user_by_id?user_id=3`);
+    //             setStudentId(prevStudentId => [response.data.student_info_id, ...prevStudentId.slice(1)]);
+    //         } catch (error) {
+    //             console.error('Error fetching data:', error);
+    //         }
+    //     };
+    //     fetchHostId();
+    // }, []);
+
+    
     const [termsChecked, setTermsChecked] = useState(false);
     const [valid, setValid] = useState(false);
-    const [openAlert, setOpenAlert] = useState(false);
 
     const handleClickOpenPopup = () => {
         setOpenAlert(true);
@@ -52,90 +60,78 @@ function BookingID(props) {
         setOpenAlert(false);
     };
 
-    const handleChange = (event, index) => {
-        const newstudentId = [...studentId];
-        newstudentId[index] = event.target.value;
-        setStudentId(newstudentId);
-        checkStudentID(event.target.value);
-      };
     
       // chackInput => valid
       const handleChecked = () => {setTermsChecked(!termsChecked);}
-      const checkStudentID = (id) => {
-        if (id === '' || /^\d{10}$/.test(id)) {
-          console.log("Valid student ID:", id);
-          return true
-        } else {
-          return false
-        }
-      };
-      const handleConfirm = () => {
-        if (studentId.every(id => id !== '') && termsChecked) {
-            console.log("OK 202");
-            setValid(true);
-        } else {
-            console.log("error");
-            setValid(false);
-        }
-    };
-    useEffect(() => {
-        const handleConfirm = () => {
-            if (studentId.every(id => id !== '') && termsChecked) {
-                console.log("OK 202");
-                setValid(true);
-            } else {
-                console.log("error");
-                setValid(false);
-            }
-        };
-    
-        handleConfirm(); 
-    }, [studentId, termsChecked]);
-    
+    //   const checkStudentID = (id) => {
+    //     if (id === '' || /^\d{10}$/.test(id)) {
+    //       console.log("Valid student ID:", id);
+    //       return true
+    //     } else {
+    //       return false
+    //     }
+    //   };
 
-    // useEffect(()=> {
-    //     axios.get('https://randomuser.me/api/')
-    //         .then(res => setTransactios (res.data.results))
-    // },[])
-    // console.log("Data:",transactions)
-    
-    //  กำหนดTransaction
+    //Heck input and setAlert
     useEffect(() => {
-        const fetchTransactions = async () => {
-          try {
-            const response = await api.get('/booking/all');
-            setTransactios(response.data);
-          } catch (error) {
-            console.error('Error fetching data:', error);
+        if (
+            formData.host_id !== '' &&
+            formData.friend_id1 !== '' &&
+            formData.friend_id2 !== '' &&
+            formData.friend_id3 !== ''
+          ) {
+            setValid(true)
+            console.log('All fields have non-empty values');
+          } else {
+            setValid(false)
+            console.log('One or more fields have empty values');
           }
-        };
-        fetchTransactions();
-    }, []);
+       
+    }, [formData, termsChecked]);
 
+    //Change data in formData
     const handelInputChange = (event) => {
-        const value = event.target.type === 'checkbox'? event.target.checked: event.target.value;
         setFormData({
             ...formData,
-            [event.target.name]:value,
+            [event.target.name]: event.target.value,
         });
     };
-
-    //Post
-    const handelFormSubmit = async (event) => {
-        event.preventDefault();
-        await api.post('/booking/create',formData);
-        fetchTransactions();
-        setFormData({
-            host_id: 0,
-            timestamp: '',
-            period: '',
-            friend_id1: 0,
-            friend_id2: 0,
-            friend_id3: 0,
-        })
-    }
+    console.log(formData)
     
+    
+    // useEffect(() => {
+    //     const handelFormSubmit = async (event) => {
+    //         event.preventDefault();
+    //         const res = await api.post('/booking/create',formData);
+    //         console.log(res)
+    //         fetchTransactions();
+    //         setFormData({
+    //             host_id: studentId[0],
+    //             timestamp: '',
+    //             period: '',
+    //             friend_id1: '',
+    //             friend_id2: '',
+    //             friend_id3: '',
+    //         })
+    //     };
+    //     studentId();
+    // }, []);
 
+    //sent DATA
+    const handelFormSubmit = async (event) => {
+        event.preventDefault(); 
+    
+        try {
+            const res = await api.post('/booking/create', formData);
+            console.log('Responce:',res); 
+    
+            console.log('Form data submitted successfully!');
+        } catch (error) {
+            console.error('Error submitting form data:', error);
+        }
+    };
+    
+    
   return (
     <>
         
@@ -190,42 +186,39 @@ function BookingID(props) {
                     InputProps={{
                         readOnly: true,
                     }}
-                    value={transactions.host_id} //formData.host_id
+                    value={formData.host_id} //formData.host_id
                     type='number'
                     variant="filled"
                     margin="dense"
                     />
                 <TextField
                     error={false}
-                    id="student1"
-                    name="student1"
+                    id="friend_id1"
+                    name="friend_id1"
                     label="Student ID No.1"
                     variant="filled"
                     type='number'
                     value={formData.friend_id1}
-                    // onChange={(event) => handleChange(event, 1)}
                     onChange={handelInputChange}
                 />
                 <TextField
                     error={false}
-                    id="student2"
-                    name="student2"
+                    id="friend_id2"
+                    name="friend_id2"
                     label="Student ID No.2"
                     variant="filled"
                     type='number'
                     value={formData.friend_id2}
-                    // onChange={(event) => handleChange(event, 2)}
                     onChange={handelInputChange}
                 />
                 <TextField
                     error={false}
-                    id="student3"
-                    name="student3"
+                    id="friend_id3"
+                    name="friend_id3"
                     label="Student ID No.3"
                     variant="filled"
                     type='number'
                     value={formData.friend_id3}
-                    // onChange={(event) => handleChange(event, 3)}
                     onChange={handelInputChange}
                 />
             </Box>
@@ -243,36 +236,18 @@ function BookingID(props) {
                                         />} 
                     label="ฉันอ่านและยอมรับเงื่อนไข" />
                 </FormGroup>
-                <div className="centerHorizontal">
-                    <Alert validInput = {valid}/>
-                    {/* <Button 
-                        variant="contained" 
-                        disabled={false}
-                        size="medium"
-                        className='confirmButton'
-                        onClick={handleConfirm}
-                    >
-                        Confirm 
-                    </Button> */}
 
+                <div className="centerHorizontal">
+                    <Alert validInput={valid} />
                 </div>
                 
             </div>
 
         </div>
-        {/* <p>API</p>
-        <div className="API">
-                {transactions?.map((val,index)=>(
-                    <div key={index}>
-                        <p>Name: {val.name.first}</p>
-                    </div>
-                ))}
-        </div> */}
-        
-        
-        
+
     </>
   )
 }
 
 export default BookingID
+
