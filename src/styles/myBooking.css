@@ -1,0 +1,79 @@
+.my-booking {
+    background-color: #8C181C;
+    width: 390px;
+    height: 844px;
+}
+
+.booking-info {
+    background-color: violet;
+    width: 100%;
+    height: 550px;
+}
+
+.booking-status {
+    width: 100%;
+    height: 200px;
+    background-color: white;
+    border-bottom-left-radius: 60px;
+    align-items: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+button {
+    margin: 10px;
+}
+
+.btn1 {
+    width: 160px;
+    height: 70px;
+    background-color: #EE596B;
+    color: black;
+    border: 2px solid rgba(0, 0, 0, .1);
+    border-radius: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, .1);
+    cursor: pointer;
+    font-size: 25px;
+}
+
+.btn2 {
+    width: 160px;
+    height: 70px;
+    background-color: #78D0B1;
+    color: black;
+    border: 2px solid rgba(0, 0, 0, .1);
+    border-radius: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, .1);
+    cursor: pointer;
+    font-size: 25px;
+}
+
+.exit-container {
+    width: 100%;
+    height: 80px;
+    background-color: #78D0B1;
+    align-items: end;
+}
+
+.exit-icon {
+    width: 30px;
+    height: 100%;
+}
+
+.location-container {
+    width: 100%;
+    height: 60px;
+    background-color: #8C181C;
+}
+
+.time-container {
+    width: 100%;
+    height: 60px;
+    background-color: aqua;
+}
+
+.location-icon {
+    width: 100%;
+    height: 100%;
+}
