@@ -23,19 +23,21 @@ import api from '../api'
 
 function BookingID() {
     // GET HOST ID
-    const userArray = ["Obaseki",25]
-    // localStorage.setItem('user', JSON.stringify(userArray));
+    const getStartTime = () => {return new Date(localStorage.getItem('startTime'))}
+    const getEndTime = () => {return new Date(localStorage.getItem('endTime'))}
+    const dayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
-    const [transactions, setTransactions] =  useState([]);
     const [formData, setFormData] = useState(
         {
-            host_id: '1234',
+            host_id: '1',
             timestamp: '',
+            start_time: getStartTime().toJSON(),
+            end_time: getEndTime().toJSON(),
             friend_id1: '',
             friend_id2: '',
             friend_id3: '',
           });
-
     // useEffect(() => {
     //     const fetchHostId = async () => {
     //         try {
@@ -47,20 +49,10 @@ function BookingID() {
     //     };
     //     fetchHostId();
     // }, []);
-
     
     const [termsChecked, setTermsChecked] = useState(false);
     const [valid, setValid] = useState(false);
 
-    const handleClickOpenPopup = () => {
-        setOpenAlert(true);
-    };
-
-    const handleClosePopup = () => {
-        setOpenAlert(false);
-    };
-
-    
       // chackInput => valid
       const handleChecked = () => {setTermsChecked(!termsChecked);}
     //   const checkStudentID = (id) => {
@@ -72,7 +64,7 @@ function BookingID() {
     //     }
     //   };
 
-    //Heck input and setAlert
+    //check input and setAlert
     useEffect(() => {
         if (
             formData.host_id !== '' &&
@@ -96,39 +88,30 @@ function BookingID() {
             [event.target.name]: event.target.value,
         });
     };
-    console.log(formData)
     
-    
-    // useEffect(() => {
-    //     const handelFormSubmit = async (event) => {
-    //         event.preventDefault();
-    //         const res = await api.post('/booking/create',formData);
-    //         console.log(res)
-    //         fetchTransactions();
-    //         setFormData({
-    //             host_id: studentId[0],
-    //             timestamp: '',
-    //             period: '',
-    //             friend_id1: '',
-    //             friend_id2: '',
-    //             friend_id3: '',
-    //         })
-    //     };
-    //     studentId();
-    // }, []);
+
+    const handleSubmit = () => {
+        setFormData({
+            ...formData,
+            timestamp: new Date().toJSON()
+        });
+    };
 
     //sent DATA
     const handelFormSubmit = async (event) => {
         event.preventDefault(); 
-    
+        handleSubmit();
+        console.log("Postdata: ",formData)
         try {
             const res = await api.post('/booking/create', formData);
-            console.log('Responce:',res); 
-    
+            console.log('Responce:',res.status%1000); 
             console.log('Form data submitted successfully!');
         } catch (error) {
             console.error('Error submitting form data:', error);
+            console.log('Error submitting form data:', error);
         }
+        if (res.status == 201){navigate('/booking')}
+        
     };
     
     
@@ -148,18 +131,19 @@ function BookingID() {
             <div 
                 className= 'dateTime choosed'
                 >
-                <div className="date">17</div>
-                <div className="month">Feb</div>
+                <div className="date">{getStartTime().getDate()}</div>
+                <div className="month">{months[getStartTime().getMonth()]}</div>
             </div>
             <div className="detailBooking">
                 <div className="centerHorizontal">
-                    <LocationOnOutlinedIcon/><div className="locationName "> ENGR Co-working space</div>
+                    <LocationOnOutlinedIcon/><div className="locationName "> TSE Co-working space</div>
                 </div>
                  <div className="timeBooking">
                     <AccessAlarmsOutlinedIcon/>
                     <div className="timeBooking-detail">
-                        <div>Monday</div>
-                        <div>09.00 - 12.00  (3 hours)</div>
+                        <div>{dayNames[getStartTime().getDay()]}</div>
+                        <div>{getStartTime().getUTCHours()}.00 - {getEndTime().getUTCHours()}.00  (3 hours)
+                        </div>
                     </div>
                 </div>
                 
@@ -186,7 +170,7 @@ function BookingID() {
                     InputProps={{
                         readOnly: true,
                     }}
-                    value={formData.host_id} //formData.host_id
+                    value={formData.host_id}
                     type='number'
                     variant="filled"
                     margin="dense"
@@ -237,7 +221,7 @@ function BookingID() {
                     label="ฉันอ่านและยอมรับเงื่อนไข" />
                 </FormGroup>
 
-                <div className="centerHorizontal">
+                <div className="centerHorizontal" onClick={handelFormSubmit} >
                     <Alert validInput={valid} />
                 </div>
                 

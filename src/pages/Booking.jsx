@@ -9,7 +9,7 @@ import api from '../api'
 
 function Booking() {
   
-  const currentTime = new Date();
+  const currentTime = new Date(); 
   const [choseDate, setChoseDate] = useState(currentTime.getDate());
   
   const handleChoseDate = (index) => {
@@ -20,20 +20,20 @@ function Booking() {
   const createBookingTime = (start, end) =>{
     const startTime = new Date();
     startTime.setDate(choseDate);
-    startTime.setHours(start);
+    startTime.setUTCHours(start);
     startTime.setMinutes(0);
     const endTime = new Date();
     endTime.setDate(choseDate);
-    endTime.setHours(end);
+    endTime.setUTCHours(end);
     endTime.setMinutes(0);
-    return startTime.toJSON() + "_" + endTime.toJSON()
+    return [startTime.toJSON() , endTime.toJSON()]
 
   }
   
   const handleSlotClick = (index) => {
-    console.log(time[index].bookTime);
-    localStorage.setItem('period', time[index].bookTime);
-    // setPostData({ period: time[index].bookTime });
+    console.log("Index: ",time[index].bookTime);
+    localStorage.setItem('startTime', time[index].bookTime[0]);
+    localStorage.setItem('endTime', time[index].bookTime[1]);
   };
   
   const time = [
@@ -47,7 +47,7 @@ function Booking() {
   //GET Push Date
   useEffect(() => {
     const fetchSlotTime = async () => {
-        const response = await api.get(`/booking/all?d=${choseDate}`);
+        const response = await api.get(`/booking/all?date=${choseDate}`);
         setSlotTimeBooking(response.data.period);
     };
   
@@ -62,7 +62,6 @@ function Booking() {
   }
 
   const navLink = (index) =>{
-    handleSlotClick(index);
     return "/bookingID"
   }
 
@@ -103,7 +102,7 @@ function Booking() {
           <NavLink 
             key={index} 
             // onSubmit={() => handleSlotClick(index)}
-            // onClick={() => handleSlotClick(index)}
+            onClick={() => handleSlotClick(index)}
             to = {slot.status ? navLink(index) : null}
             style={{ textDecoration: 'none', color: 'inherit' }}>
             <div className={`timeslot ${slot.status ? 'available' : 'reserved'}`} >

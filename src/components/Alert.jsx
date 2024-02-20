@@ -9,7 +9,6 @@ import Slide from '@mui/material/Slide';
 import CancelOutlinedIcon from '@mui/icons-material/CancelOutlined';
 import Error from '../assets/error.png'
 import Checkmark from '../assets/checkmark.png'
-import api from '../api'
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -26,20 +25,11 @@ export default function AlertDialogSlide(props) {
 
   const handleClose = () => {
     setOpen(false);
-  };
-  // console.log("Input" ,props.studentId)
+    // navigation.navigate('/booking')
 
-  const getTimeSubmit = () =>{
-    let timeSubmit = new Date().toJSON();
-    console.log('time:',timeSubmit);
-}
-const handelFormSubmit = async () => {
-  // event.preventDefault();
-  // const res = await api.post('/booking/create',formData);
-  // console.log(res)
-  // fetchTransactions();
-  getTimeSubmit()
-  }
+  };
+
+
 
   return (
     <React.Fragment>
