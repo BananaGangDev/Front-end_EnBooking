@@ -2,9 +2,9 @@ import * as React from 'react';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
-import DialogTitle from '@mui/material/DialogTitle';
+// import Dialog from '@mui/material/Dialog';
+// import DialogText from '@mui/material/DialogText';
+// import DialogTitle from '@mui/material/DialogTitle';
 import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
 import AccessAlarmsOutlinedIcon from '@mui/icons-material/AccessAlarmsOutlined';
 import CancelOutlinedIcon from '@mui/icons-material/CancelOutlined';
@@ -37,88 +37,50 @@ export default function AlertDialog() {
         onClose={handleClose}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
-        className='mybooking'
+        
       >
-        <div >
-          <DialogActions>
-          <CancelOutlinedIcon onClick={handleClose} className='closed-btn'/>
-          </DialogActions>
+        <div className='mybooking'>
+          <div className="mybooking-inner">
+            <DialogActions className='close-ctn'>
+              <CancelOutlinedIcon onClick={handleClose} className='close-btn'/>
+            </DialogActions>
+            
+            <div className='title'>
+            {"My Booking"}
+            </div>
+            <div>
+              <div  className='booking-info' id='booking-info'>
+                <div id="description-Date">
+                  <div>5</div>
+                  <div>Feb</div>
+                </div>
+              </div>
+              
+              <div id="description" className='booking-info'>
+
+                <div className='context'>
+                <LocationOnOutlinedIcon sx={{ fontSize: 30}} />
+                <div>TSE Co-Working Space</div>
+              </div>
+              <div className='context'> 
+                <AccessAlarmsOutlinedIcon sx={{ fontSize: 30}} />
+                <div>9.00 - 10.00น. </div>
+                </div> 
+              </div>
+            </div>
+              
+
+            <div id='btn-group'>
+            <Button className='cancle-btn btn' onClick={handleClose}>Cancle</Button>
+            <Button className='confirm-btn btn' onClick={handleClose} autoFocus> Confirm</Button>
+            </div>
+          </div>
           
-          <DialogTitle id="title">
-          {"My Booking"}
-        </DialogTitle>
-        <DialogContent className='booking-info'>
-          <DialogContentText id="description">
-            5 FED
-          </DialogContentText>
-          
-        </DialogContent>
-        <div className='booking-info'>
-          <div >
-            <p>ใส่วันที่ที่จอง</p>
-          </div>
-
-          <div className='context'>
-            <LocationOnOutlinedIcon />
-            <p>TSE Co-Working Space</p>
-          </div>
-          <div className='context'> 
-            <AccessAlarmsOutlinedIcon />
-            <p>9.00 - 10.00น. </p>
-          </div>
-
-        </div>
-
-            <DialogActions>
-          <Button onClick={handleClose}>Disagree</Button>
-          <Button onClick={handleClose} autoFocus>
-            Agree
-          </Button>
-        </DialogActions>
           
         </div>
 
       </Dialog>
-        {/* <Dialog
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="alert-dialog-title"
-        aria-describedby="alert-dialog-description"
-        className='mybooking'
-      >
-        <DialogTitle id="title">
-          {"My Booking"}
-        </DialogTitle>
-        <DialogContent className='booking-info'>
-          <DialogContentText id="description">
-            Let Google help apps determine location. This means sending anonymous
-            location data to Google, even when no apps are running.
-          </DialogContentText>
-        </DialogContent>
-        <div className='booking-info'>
-          <div>
-            <p>ใส่วันที่ที่จอง</p>
-          </div>
-
-          <div>
-            <LocationOnOutlinedIcon />
-            <p>TSE Co-Working Space</p>
-          </div>
-
-          <div>
-            <AccessAlarmsOutlinedIcon />
-          </div>
-
-        </div>
-
-        <DialogActions>
-          <Button onClick={handleClose}>Disagree</Button>
-          <Button onClick={handleClose} autoFocus>
-            Agree
-          </Button>
-        </DialogActions>
-      </Dialog>
-         */}
+        
     </React.Fragment>
   );
 }
