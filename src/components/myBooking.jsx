@@ -8,6 +8,8 @@ import DialogTitle from '@mui/material/DialogTitle';
 import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
 import AccessAlarmsOutlinedIcon from '@mui/icons-material/AccessAlarmsOutlined';
 import CancelOutlinedIcon from '@mui/icons-material/CancelOutlined';
+// import EventAvailableTwoToneIcon from '@mui/icons-material/EventAvailableTwoTone';
+
 
 export default function AlertDialog() {
   const [open, setOpen] = React.useState(false);
@@ -27,6 +29,7 @@ export default function AlertDialog() {
       </div> */}
       <Button variant="outlined" className="mybooking-btn" onClick={handleClickOpen}>
         My booking
+        {/* <EventAvailableTwoToneIcon /> */}
       </Button>
 
       <Dialog

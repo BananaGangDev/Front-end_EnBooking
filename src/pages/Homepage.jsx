@@ -1,106 +1,66 @@
-// import { useState } from 'react';
-// import { useNavigate } from 'react-router-dom';
-// // import axios from 'axios';
-
-// import covidvaImage from '/Users/kanpitchahong-ek/enbooking/src/assets/CoVidva.jpeg';
-// // import { FaRegCalendarCheck } from "react-icons/fa6";
-// // import { LiaSignOutAltSolid } from "react-icons/lia";
-
-// const Homepage = () => {
-//   const navigate = useNavigate();
-//   const [userData, setUserData] = useState(null);
-
-// //   useEffect(() => {
-// //     // Retrieve student_info_id from localStorage
-// //     const studentInfoId = localStorage.getItem('student_info_id');
-
-// //     if (!studentInfoId) {
-// //       navigate('/');
-// //     } else {
-// //       // Fetch user data using the student_info_id
-// //       fetchUserData(studentInfoId);
-// //     }
-// //   }, [navigate]);
-
-// //   const fetchUserData = async (studentInfoId) => {
-// //     try {
-// //         const response = await axios.get(`http://127.0.0.1:5660/signup/get_user_by_id/${studentInfoId}`);
-// //         setUserData(response.data);
-// //     } catch (error) {
-// //         console.error('Error fetching user data: ', error)
-// //         navigate('/')
-// //     }
-// //   };
-
-//   const handleSignOut = () => {
-//     localStorage.removeItem('student_info_id'); // ลบ userId จาก localStorage เมื่อผู้ใช้ออกจากระบบ
-//     setUserData(null);
-//     navigate('/'); // นำผู้ใช้กลับไปยังหน้า login
-//   };
-
-//   const goToBooking = () => {
-//     navigate('/booking'); // นำผู้ใช้ไปยังหน้า booking
-//   };
-
-//   // หากยังไม่ได้ดึงข้อมูลผู้ใช้ ให้แสดงข้อความ Loading...
-// //   if (!userData) {
-// //     return <div>Loading...</div>;
-// //   }
-
-//   return (
-//     <div className="homepage">
-//       <header className="header">
-//         {/* <LiaSignOutAltSolid className="arrowBack" onClick={handleSignOut}/> */}
-//         <button className='signoutBttn' onClick={handleSignOut}>Sign Out</button>
-//         <div>Id: {userData.student_info_id}</div>
-//       </header>
-//       <div className='container'>
-//         <div className="study-room" onClick={goToBooking}>
-//             <img src={covidvaImage} alt="Co vidva" />
-//         </div>
-//         <div>Categories</div>
-//         <button onClick={goToBooking}>My booking</button>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default Homepage;
-
-//-----------------------------------------------------------//
 // import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import covidva from '/Users/kanpitchahong-ek/enbooking/src/assets/Booking.png';
 import MyBooking from '../components/myBooking'
-// import EventAvailableIcon from '@mui/icons-material/EventAvailable';
-
+import api from '/src/api.jsx';
 
 const Homepage = () => {
   const navigate = useNavigate();
-// const [valid, setValid] = useState(false);
+  const [userData, setUserData] = useState(null);
 
-  // Function to navigate to the booking page
+  useEffect(() => {
+  // เรียกใช้ค่า student_info_id จาก localStorage
+  const student_info_id = localStorage.getItem('student_info_id');
+
+    if (!student_info_id) {
+      navigate('/');
+    } else {
+      // Fetch user data โดยใช้ student_info_id
+      fetchUserData(student_info_id);
+    }
+  }, [navigate]);
+
+  // รับค่า student_info_id จาก backend มาใช้เป็น userData
+  const fetchUserData = async (student_info_id) => {
+    try {
+      const response = await api.get(`/signup/get_user_by_id?user_id=${student_info_id}`);
+      setUserData(response.data);
+      console.log(response.data)
+    } catch (error) {
+      console.error('Error fetching user data: ', error)
+      navigate('/')
+    }
+  };
+
+  const handleSignOut = () => {
+    // ลบ student_info_id จาก localStorage เมื่อผู้ใช้ออกจากระบบ
+    localStorage.removeItem('student_info_id');
+    setUserData(null);
+    // กลับไปที่หน้า log in
+    navigate('/');
+  };
+
   const goToBookingPage = () => {
     navigate('/booking');
   };
 
-  const goToLoginPage = () => {
-    navigate('/');
+  // แสดงข้อความ Loading... ถ้ายังไม่มีข้อมูลผู้ใช้ หรือยังดึงข้อมูลมาไม่สำเร็จ
+  if (!userData) {
+    return <div>Loading...</div>;
   }
 
-  // Function to open the My Booking section
-  const openMyBooking = () => {
-    navigate('/myBooking')
-  };
-
+  // homepage
   return (
     <div className="homepage">
-      <div className="sign-out" onClick={goToLoginPage}>
+
+      <div className="sign-out" onClick={handleSignOut}>
         <button>Sign Out</button>
       </div>
+
       <div className="header">
         <div className="user-info">
-            <p>Id: 64107425x0</p>
+            <p>Id: {userData.student_info_id}</p>
         </div>
         <div className="line1">
             <p className='p-study'>Study room</p>
@@ -114,13 +74,12 @@ const Homepage = () => {
         <div className="line2">
             <p className="p-cate">Categories</p>
         </div>    
-        {/* 
-        <button className="my-booking-btn" onClick={openMyBooking}>My booking</button> */}
-        {/* <EventAvailableIcon className="my-booking-icon"/> */}
+
         <div className='my-booking-ctn'>
           <MyBooking />
         </div>
       </div>
+      
     </div>
   );
 };

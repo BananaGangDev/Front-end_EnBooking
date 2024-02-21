@@ -1,8 +1,4 @@
-/* body {
-    background-color: #0477BF;
-  }
-   */
-  .s-wrapper {
+ .s-wrapper {
     width: 390px;
     height: 844px;
     background: #fff;
@@ -33,18 +29,14 @@
     height: 574px;
     border-top-left-radius: 60px;
     border-top-right-radius: 60px;
-    /* background-color: #fff3b7; */
     display: flex;
     flex-direction: column;
     align-items: center;
-    /* justify-content: center; */
   }
   
   .s-head-pic {
     width: 100%;
     height: 100%;
-    /* top: -50px; */
-    /* z-index: 0; */
     opacity: 0.8;
   }
   
@@ -63,8 +55,7 @@
   
   .s-input-box input {
     width: 250px;
-    height: 5px;
-    /* background: transparent; */
+    height: 2px;
     border: 2px solid rgba(0, 0, 0, .1);
     border-radius: 20px;
     font-family: 'Fredoka', sans-serif;
@@ -78,7 +69,6 @@
   
   .s-input-box input:hover {
     border: 2px solid #515151;
-    /* background: #fff3b7; */
   }
   
   .s-input-box input:active {
@@ -87,7 +77,6 @@
   
   .s-input-box input:hover {
     border: 2px solid #515151;
-    /* background: #fff3b7; */
   }
   
   .s-input-box input:active {
@@ -95,11 +84,9 @@
   }
 
   .s-wrapper .back-to-login {
-    /* display: flex; */
-    /* justify-content: flex-end; */
     text-align: center;
     font-size: 14px;
-    margin-top: -15px;
+    margin-top: -5px;
   }
   
   .back-to-login a {
@@ -123,8 +110,7 @@
     cursor: pointer;
     font-size: 18px;
     font-weight : bold;
-    margin-top: 15px;
-    /* margin: 10px 130px 10px; */
+    margin-top: 20px;
     transition: background-color 0.3s ease;
   }
   
