@@ -1,13 +1,13 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import App from './App.jsx'
+// import App from './App.jsx'
 import Booking from './pages/Booking.jsx'
 import BookingID from './pages/BookingID.jsx'
-import Demo from './components/Alert.jsx'
+// import Demo from './components/Alert.jsx'
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { BrowserRouter as Router, NavLink } from "react-router-dom";
+// import { BrowserRouter as Router, NavLink } from "react-router-dom";
 import './index.css'
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+// import { BrowserRouter, Routes, Route } from "react-router-dom";
 import './styles/main.css';
 
 import LoginPage from './pages/LoginPage.jsx';
@@ -24,7 +24,6 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <Route path="/signup" element={<SignupPage />} />
         <Route path="/homepage" element={<Homepage />} />
         <Route path="myBooking" element={<MyBooking />} />
-        <Route path="/" element={<Booking />} />
         <Route path="/booking" element={<Booking />} />
         <Route path="/bookingID" element={<BookingID />} />
 

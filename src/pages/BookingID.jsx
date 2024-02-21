@@ -116,7 +116,7 @@ function BookingID() {
    
     };
     useEffect(()=>{
-        if (resStatus == 201){navigate('/booking')}
+        if (resStatus == 201){navigate('/homepage')}
     },[resStatus]);
     
   return (
