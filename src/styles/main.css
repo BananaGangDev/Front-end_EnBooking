@@ -6,4 +6,7 @@
 @import "./Homepage.css";
 @import "./LoginPage.css";
 @import "./SignupPage.css";
-@import "./myBooking.css"
+@import "./myBooking.css";
+@import "./Booking.css";
+@import "./BookingID.css";
+@import "./popup.css";
