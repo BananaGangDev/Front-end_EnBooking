@@ -24,7 +24,7 @@ const LoginForm = () => {
     console.log(loginData);
 
     try {
-      const response = await api.get('/signup/log_in?users_id=${student_info_id}&password=${password}', loginData)
+      const response = await api.get(`/signup/log_in?users_id=${student_info_id}&password=${password}`, loginData)
       if (response.status === 200) {
         // Assuming the backend sends back some form of user data or token on successful login
         console.log('Login successful:', response.data);

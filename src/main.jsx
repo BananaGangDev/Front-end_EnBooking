@@ -7,7 +7,7 @@ import './styles/main.css';
 
 import LoginPage from './pages/LoginPage.jsx';
 import SignupPage from './pages/SignupPage.jsx';
-import Homepage from '/Users/kanpitchahong-ek/enbooking/src/pages/Homepage.jsx'
+import Homepage from '/src/pages/Homepage.jsx'
 import MyBooking from '/src/components/myBooking.jsx';
 
 

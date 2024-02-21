@@ -71,10 +71,13 @@
 // import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import covidva from '/Users/kanpitchahong-ek/enbooking/src/assets/Booking.png';
+import MyBooking from '../components/myBooking'
 // import EventAvailableIcon from '@mui/icons-material/EventAvailable';
+
 
 const Homepage = () => {
   const navigate = useNavigate();
+// const [valid, setValid] = useState(false);
 
   // Function to navigate to the booking page
   const goToBookingPage = () => {
@@ -110,9 +113,13 @@ const Homepage = () => {
         </div>
         <div className="line2">
             <p className="p-cate">Categories</p>
-        </div>
-        <button className="my-booking-btn" onClick={openMyBooking}>My booking</button>
+        </div>    
+        {/* 
+        <button className="my-booking-btn" onClick={openMyBooking}>My booking</button> */}
         {/* <EventAvailableIcon className="my-booking-icon"/> */}
+        <div className='my-booking-ctn'>
+          <MyBooking />
+        </div>
       </div>
     </div>
   );

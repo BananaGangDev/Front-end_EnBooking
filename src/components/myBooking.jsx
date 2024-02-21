@@ -1,91 +1,121 @@
-import { useState, useEffect } from 'react';
-import axios from 'axios';
-// import noBookingImage from './path-to-your-no-booking-image.jpg'; // Path to your no booking image
-import { RxCrossCircled } from "react-icons/rx";
+import * as React from 'react';
+import Button from '@mui/material/Button';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
 import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
 import AccessAlarmsOutlinedIcon from '@mui/icons-material/AccessAlarmsOutlined';
+import CancelOutlinedIcon from '@mui/icons-material/CancelOutlined';
 
-const MyBooking = () => {
-  const [bookingData, setBookingData] = useState(null);
-  const [isConfirmed, setIsConfirmed] = useState(false);
-  const [isCancelled, setIsCancelled] = useState(false);
+export default function AlertDialog() {
+  const [open, setOpen] = React.useState(false);
 
-  useEffect(() => {
-    // Fetch the booking data from the backend
-    const fetchBookingData = async () => {
-      try {
-        const response = await axios.get('/api/booking/today');
-        setBookingData(response.data);
-        setIsCancelled(response.data.isCancelled);
-      } catch (error) {
-        console.error('Error fetching booking data:', error);
-      }
-    };
-
-    fetchBookingData();
-  }, []);
-
-  const handleConfirm = async () => {
-    try {
-      // Send confirmation to the backend
-      const response = await axios.post('/api/booking/confirm', { id: bookingData.id });
-      if (response.status === 200) {
-        setIsConfirmed(true);
-      }
-    } catch (error) {
-      console.error('Error confirming booking:', error);
-    }
+  const handleClickOpen = () => {
+    setOpen(true);
   };
 
-  const handleCancel = async () => {
-    try {
-      // Send cancellation to the backend
-      const response = await axios.post('/api/booking/cancel', { id: bookingData.id });
-      if (response.status === 200) {
-        setIsCancelled(true);
-      }
-    } catch (error) {
-      console.error('Error cancelling booking:', error);
-    }
+  const handleClose = () => {
+    setOpen(false);
   };
-
-  if (!bookingData || isCancelled) {
-    return (
-      <div className="my-booking">
-        <p>No booking today</p>
-        {/* <img src={noBookingImage} alt="No booking" /> */}
-      </div>
-    );
-  }
 
   return (
-    <div className="my-booking">
-      <div className="booking-info">
-        <div className='exit-container'>
-          <RxCrossCircled className='exit-icon'/>
-        </div>
-        <p>{bookingData.date}</p>
-        <div className='location-container'>
-          <LocationOnOutlinedIcon className='location-icon'/>
-        </div>
-        <div className='time-container'>
-          <AccessAlarmsOutlinedIcon className='time-icon'/>
-        </div>
-        
-        <p>{bookingData.time}</p>
-      </div>
-      <div className="booking-status">
-        {isConfirmed ? (
-            <h1>Already confirmed</h1>
-        ) : (
-            <>
-            <button className="btn1" onClick={handleConfirm}>Confirm</button>
-            <button className="btn2" onClick={handleCancel}>Cancel</button>
-            </>
-        )}
-      </div>
-    </div>
-  );
-};
+    <React.Fragment>
+      {/* <div className="mybooking">
 
-export default MyBooking;
+      </div> */}
+      <Button variant="outlined" className="mybooking-btn" onClick={handleClickOpen}>
+        My booking
+      </Button>
+
+      <Dialog
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+        className='mybooking'
+      >
+        <div >
+          <DialogActions>
+          <CancelOutlinedIcon onClick={handleClose} className='closed-btn'/>
+          </DialogActions>
+          
+          <DialogTitle id="title">
+          {"My Booking"}
+        </DialogTitle>
+        <DialogContent className='booking-info'>
+          <DialogContentText id="description">
+            5 FED
+          </DialogContentText>
+          
+        </DialogContent>
+        <div className='booking-info'>
+          <div >
+            <p>ใส่วันที่ที่จอง</p>
+          </div>
+
+          <div className='context'>
+            <LocationOnOutlinedIcon />
+            <p>TSE Co-Working Space</p>
+          </div>
+          <div className='context'> 
+            <AccessAlarmsOutlinedIcon />
+            <p>9.00 - 10.00น. </p>
+          </div>
+
+        </div>
+
+            <DialogActions>
+          <Button onClick={handleClose}>Disagree</Button>
+          <Button onClick={handleClose} autoFocus>
+            Agree
+          </Button>
+        </DialogActions>
+          
+        </div>
+
+      </Dialog>
+        {/* <Dialog
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+        className='mybooking'
+      >
+        <DialogTitle id="title">
+          {"My Booking"}
+        </DialogTitle>
+        <DialogContent className='booking-info'>
+          <DialogContentText id="description">
+            Let Google help apps determine location. This means sending anonymous
+            location data to Google, even when no apps are running.
+          </DialogContentText>
+        </DialogContent>
+        <div className='booking-info'>
+          <div>
+            <p>ใส่วันที่ที่จอง</p>
+          </div>
+
+          <div>
+            <LocationOnOutlinedIcon />
+            <p>TSE Co-Working Space</p>
+          </div>
+
+          <div>
+            <AccessAlarmsOutlinedIcon />
+          </div>
+
+        </div>
+
+        <DialogActions>
+          <Button onClick={handleClose}>Disagree</Button>
+          <Button onClick={handleClose} autoFocus>
+            Agree
+          </Button>
+        </DialogActions>
+      </Dialog>
+         */}
+    </React.Fragment>
+  );
+}
