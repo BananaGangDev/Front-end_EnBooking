@@ -9,6 +9,7 @@ import Slide from '@mui/material/Slide';
 import CancelOutlinedIcon from '@mui/icons-material/CancelOutlined';
 import Error from '../assets/error.png'
 import Checkmark from '../assets/checkmark.png'
+import { useNavigate } from 'react-router-dom';
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -16,16 +17,16 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 
 export default function AlertDialogSlide(props) {
   const [open, setOpen] = React.useState(false);
+  const navigate = useNavigate();
 
   // OPEN CLOSE ALERT
   const handleClickOpen = () => {
     setOpen(true);
-    handelFormSubmit();
   };
 
   const handleClose = () => {
     setOpen(false);
-    // navigation.navigate('/booking')
+    // navigate('/booking')
 
   };
 

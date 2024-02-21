@@ -15,10 +15,9 @@ import MuiFormControl, { useFormControl } from "@mui/material/FormControl";
 import OutlinedInput from '@mui/material/OutlinedInput';
 import FormHelperText from '@mui/material/FormHelperText';
 import Button from '@mui/material/Button';
-import { BrowserRouter as Router, NavLink } from "react-router-dom";
+import { BrowserRouter as Router, NavLink, useNavigate } from "react-router-dom";
 import Alert from '../components/Alert'
 import api from '../api'
-
 
 
 function BookingID() {
@@ -70,7 +69,8 @@ function BookingID() {
             formData.host_id !== '' &&
             formData.friend_id1 !== '' &&
             formData.friend_id2 !== '' &&
-            formData.friend_id3 !== ''
+            formData.friend_id3 !== '' && 
+            termsChecked
           ) {
             setValid(true)
             console.log('All fields have non-empty values');
@@ -98,22 +98,26 @@ function BookingID() {
     };
 
     //sent DATA
+    const navigate = useNavigate();
+    const [resStatus, setResStatus] = useState();
     const handelFormSubmit = async (event) => {
         event.preventDefault(); 
         handleSubmit();
         console.log("Postdata: ",formData)
         try {
             const res = await api.post('/booking/create', formData);
-            console.log('Responce:',res.status%1000); 
+            setResStatus(res.status)
+            console.log('Responce:',res.status); 
             console.log('Form data submitted successfully!');
         } catch (error) {
             console.error('Error submitting form data:', error);
             console.log('Error submitting form data:', error);
         }
-        if (res.status == 201){navigate('/booking')}
-        
+   
     };
-    
+    useEffect(()=>{
+        if (resStatus == 201){navigate('/booking')}
+    },[resStatus]);
     
   return (
     <>
