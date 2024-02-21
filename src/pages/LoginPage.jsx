@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import '/src/styles/LoginPage.css';
 import HeadPic from '/src/assets/vidvabuilding.jpg';
-import LogoPic from '/Users/kanpitchahong-ek/enbooking/src/assets/EnBookingLogo.jpeg'
+import LogoPic from '/src/assets/EnBookingLogo.jpeg'
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import api from '/src/api.jsx'

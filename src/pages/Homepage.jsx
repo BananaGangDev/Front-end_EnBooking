@@ -1,7 +1,7 @@
 // import React from 'react';
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import covidva from '/Users/kanpitchahong-ek/enbooking/src/assets/Booking.png';
+import covidva from '/src/assets/Booking.png';
 import MyBooking from '../components/myBooking'
 import api from '/src/api.jsx';
 
@@ -79,7 +79,7 @@ const Homepage = () => {
           <MyBooking />
         </div>
       </div>
-      
+
     </div>
   );
 };

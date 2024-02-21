@@ -2,7 +2,7 @@ import { useState} from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import HeadPic from '/src/assets/vidvabuilding.jpg';
-import LogoPic from '/Users/kanpitchahong-ek/enbooking/src/assets/EnBookingLogo.jpeg'
+import LogoPic from '/src/assets/EnBookingLogo.jpeg'
 import api from'/src/api.jsx'
 
 const SignupForm = () => {
@@ -163,7 +163,7 @@ const SignupForm = () => {
           <div className='btn-container'>
             <button type='submit' onClick={handleClick}>Sign Up</button>
           </div>
-          
+
           <div className="back-to-login">
             <p>Already have an account? <Link to="/">Sign in here</Link></p>
           </div>
