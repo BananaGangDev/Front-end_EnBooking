@@ -59,11 +59,9 @@ const Homepage = () => {
       </div>
 
       <div className="header">
-        <div className="user-info">
-            <p>Id: {userData.student_info_id}</p>
-        </div>
         <div className="line1">
-            <p className='p-study'>Study room</p>
+          <p className='user-id'>Id: {userData.student_info_id}</p>
+          <p className='p-study'>Study room</p>
         </div>
       </div>
 

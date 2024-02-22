@@ -29,7 +29,7 @@ function BookingID() {
 
     const [formData, setFormData] = useState(
         {
-            host_id: '1',
+            host_id: localStorage.getItem('student_info_id'),
             timestamp: '',
             start_time: getStartTime().toJSON(),
             end_time: getEndTime().toJSON(),

@@ -23,7 +23,7 @@
   height: 574px;
   border-top-left-radius: 60px;
   border-top-right-radius: 60px;
-  background-color: #fff3b7;
+  /* background-color: #fff3b7; */
   display: flex;
   flex-direction: column;
   align-items: center;

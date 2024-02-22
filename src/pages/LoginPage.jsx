@@ -86,7 +86,6 @@ const LoginForm = () => {
               </div>
 
               <button type='submit'>Sign In</button>
-              <Link to="/homepage">homepage</Link>
             </div>
 
         </form>

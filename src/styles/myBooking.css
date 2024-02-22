@@ -93,7 +93,11 @@ button.mybooking-btn :active {
     background-color: #EE596B;
 }
 
+.confirm-btn {
+    background-color: #78D0B1;
+}
+
 .close-ctn {
-    background-color: #515151;
+    /* background-color: #515151; */
     margin-top: -10px;
 }

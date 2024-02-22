@@ -3,6 +3,17 @@
     height: 844px;
     display: flex;
     flex-direction: column;
+    align-items: center;
+  }
+
+  .header {
+    align-items: center;
+  }
+
+  .header p {
+    color: white;
+    font-size: 32px;
+    text-align: center;
   }
   
   .sign-out {
@@ -23,6 +34,7 @@
     outline: none;
     cursor: pointer;
     margin-left: 10px;
+    margin-left: -190px;
   }
 
   .sign-out button:hover {
@@ -38,26 +50,30 @@
   }
 
   .user-info {
+    width: 100px;
     margin-top: -30px;
+    background-color: aqua;
   }
 
-  .user-info p {
+  /* .user-info p {
     color: white;
     font-size: 32px;
     text-align: center;
-    margin-bottom: -10px;
-  }
+  } */
 
   .line1 {
     border-bottom: 2px solid white;
     width: 290px;
-    margin-left: 50px;
-    margin-bottom: 20px;
+    margin-bottom: -40px;
+  }
+
+  .user-id {
+    margin-bottom: -10px;
   }
 
   .p-study {
     color: white;
-    font-size: 24px;
+    font-size: 21px;
     text-align: center;
     margin-bottom: 0;
   }
