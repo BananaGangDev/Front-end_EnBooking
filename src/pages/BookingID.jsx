@@ -37,33 +37,11 @@ function BookingID() {
             friend_id2: '',
             friend_id3: '',
           });
-    // useEffect(() => {
-    //     const fetchHostId = async () => {
-    //         try {
-    //             const response = await api.get(`/signup/get_user_by_id?user_id=3`);
-    //             setStudentId(prevStudentId => [response.data.student_info_id, ...prevStudentId.slice(1)]);
-    //         } catch (error) {
-    //             console.error('Error fetching data:', error);
-    //         }
-    //     };
-    //     fetchHostId();
-    // }, []);
-    
+
     const [termsChecked, setTermsChecked] = useState(false);
     const [valid, setValid] = useState(false);
+    const handleChecked = () => {setTermsChecked(!termsChecked);}
 
-      // chackInput => valid
-      const handleChecked = () => {setTermsChecked(!termsChecked);}
-    //   const checkStudentID = (id) => {
-    //     if (id === '' || /^\d{10}$/.test(id)) {
-    //       console.log("Valid student ID:", id);
-    //       return true
-    //     } else {
-    //       return false
-    //     }
-    //   };
-
-    //check input and setAlert
     useEffect(() => {
         if (
             formData.host_id !== '' &&
@@ -107,8 +85,10 @@ function BookingID() {
         try {
             const res = await api.post('/booking/create', formData);
             setResStatus(res.status)
-            console.log('Responce:',res.status); 
-            console.log('Form data submitted successfully!');
+            // console.log('Responce:',res.status); 
+            // console.log('Form data submitted successfully!');
+            localStorage.removeItem('startTime');
+            localStorage.removeItem('endTime');
         } catch (error) {
             console.error('Error submitting form data:', error);
             console.log('Error submitting form data:', error);
@@ -124,7 +104,7 @@ function BookingID() {
         
         <div className="header">
             
-            <NavLink to="/">
+            <NavLink to="/booking">
                 <ArrowBackIcon className='arrowBack' />
             </NavLink>
             <h1 className='header-container'>Booking</h1>
@@ -132,9 +112,7 @@ function BookingID() {
             <img src={BookIcon} alt="Book-logo" className="bookicon"/>
         </div>
         <div className="timeschedule centerHorizontal">
-            <div 
-                className= 'dateTime choosed'
-                >
+            <div className= 'dateTime choosed' >
                 <div className="date">{getStartTime().getDate()}</div>
                 <div className="month">{months[getStartTime().getMonth()]}</div>
             </div>

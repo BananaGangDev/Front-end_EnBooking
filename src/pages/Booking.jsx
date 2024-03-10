@@ -11,6 +11,7 @@ function Booking() {
   
   const currentTime = new Date(); 
   const [choseDate, setChoseDate] = useState(currentTime.getDate());
+  const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
   
   const handleChoseDate = (index) => {
     setChoseDate(currentTime.getDate() + index);
@@ -37,7 +38,7 @@ function Booking() {
   };
   
   const time = [
-    { time_str: '9.00-12.00 น.', confirmTime: '08.30 - 09.00 น.' , status: slotTimeBooking[0], bookTime: createBookingTime(9,12)},
+    { time_str: '9.00-12.00 น.', confirmTime: '08.30 - 09.00 น.' , status: !slotTimeBooking[0], bookTime: createBookingTime(9,12)},
     { time_str: '12.00-15.00 น.', confirmTime: '11.30 - 12.00 น.' , status: slotTimeBooking[1], bookTime: createBookingTime(12,15)},
     { time_str: '15.00-18.00 น.', confirmTime: '14.30 - 15.00 น.' , status: slotTimeBooking[2], bookTime: createBookingTime(15,18)},
     { time_str: '18.00-21.00 น.', confirmTime: '17.30 - 18.00 น.' , status: slotTimeBooking[3], bookTime: createBookingTime(18,21)},
@@ -74,26 +75,16 @@ function Booking() {
         <h1 className='header-container'>Booking</h1>
         <img src={BookIcon} alt="Book-logo" className="bookicon"/>
       </div>
-      <div className="calendar centerHorizontal">
-        {[...Array(4)].map((_, index) => {
-          const createTime = new Date();
-          createTime.setDate(currentTime.getDate() + index);
-          const dateString = createTime.toDateString().split(' ');
-          return (
-            <div className="cardDate centerVertical">
-              <div className="day">{dateString[0]}</div>  
-              <div 
-                className={`dateTime ${choseDate == createTime.getDate() ? 'choosed' : ''}`}
-                key={index} 
-                onClick={() => handleChoseDate(index)}
-              >
-                <div className="date">{createTime.getDate()}</div>
-                <div className="month">{dateString[1]}</div>
-              </div>
+      {/* Title */}
+      <div className="timeschedule centerHorizontal">
+        <div className= 'dateTime choosed' >
+          <div className="date">{currentTime.getDate()}</div>
+          <div className="month">{months[currentTime.getMonth()]}</div>
+        </div>
+        <div className="detailLocation">
+          <div className="locationName">Co-working space</div>
+          <div className='faculty'>At ENGR </div>
             </div>
-
-          );
-        })}
       </div>
 
       <div className="schedule container">
@@ -102,7 +93,7 @@ function Booking() {
           <NavLink 
             key={index} 
             // onSubmit={() => handleSlotClick(index)}
-            onClick={() => handleSlotClick(index)}
+            onClick={() => slot.status ? handleSlotClick(index) : null}
             to = {slot.status ? navLink(index) : null}
             style={{ textDecoration: 'none', color: 'inherit' }}>
             <div className={`timeslot ${slot.status ? 'available' : 'reserved'}`} >
@@ -115,7 +106,7 @@ function Booking() {
                   ) : 
                   (
                     <div>
-                      <div className='bookingtime'>Reserved</div> 
+                      <div className='bookingtime'>End period</div> 
                       <div className='confirmtime'>{slot.time_str}</div>
                     </div>
                   )

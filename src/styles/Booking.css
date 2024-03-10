@@ -18,17 +18,28 @@
     z-index: 2;
     margin-left: 2em;
 }
+.detailLocation {
+    padding-left: 2em;
+}
+.detailLocation .locationName{
+    font-size: 1.6em;
+}
+.detailLocation .faculty{
+    font-size: 1em;
+    color: #D3D3D3;
+}
+
 .schedule{
-    position: relative;
-    z-index: 1;
-    top : -3em;
+    /* position: relative; */
+    /* z-index: 1;
+    top : -3em; */
 }
 .container{
     color: black;
     background-color: #ffffff;
     border-top-left-radius: 3em;
     padding: 4em 2em 2em 2em;
-    position: relative;    
+    /* position: relative;     */
 }
 .subtitle{
     font-size: 1.7em;
@@ -46,8 +57,8 @@
     background-color: #D9D9D9;
 }
 .reserved{
-    background-color: #b22323;
-    color: #fff;
+    color: #696969;
+    border: 1px #363636 solid;
 }
 .bookingtime{
     font-size: 1.5em;

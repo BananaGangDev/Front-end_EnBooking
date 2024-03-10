@@ -65,7 +65,7 @@ const Homepage = () => {
         </div>
       </div>
 
-      <div className="container">
+      <div className="containerContext">
         <div className="image-container" onClick={goToBookingPage}>
             <img src={covidva} alt="Engr Coworking"/>
         </div>
