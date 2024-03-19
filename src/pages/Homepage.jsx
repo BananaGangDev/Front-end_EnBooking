@@ -3,7 +3,9 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import covidva from '/src/assets/Booking.png';
 import MyBooking from '../components/myBooking'
+import Report from '/src/components/Report.jsx';
 import api from '/src/api.jsx';
+import { BiLogOutCircle } from "react-icons/bi";
 
 const Homepage = () => {
   const navigate = useNavigate();
@@ -55,7 +57,7 @@ const Homepage = () => {
     <div className="homepage">
 
       <div className="sign-out" onClick={handleSignOut}>
-        <button>Sign Out</button>
+        <BiLogOutCircle />
       </div>
 
       <div className="header">
@@ -76,6 +78,10 @@ const Homepage = () => {
         <div className='my-booking-ctn'>
           <MyBooking />
         </div>
+
+        <div className='report-ctn'>
+          <Report />
+        </div>
       </div>
 
     </div>
@@ -83,3 +89,5 @@ const Homepage = () => {
 };
 
 export default Homepage;
+
+

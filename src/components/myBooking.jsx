@@ -11,22 +11,23 @@ import AccessAlarmsOutlinedIcon from '@mui/icons-material/AccessAlarmsOutlined';
 import CancelOutlinedIcon from '@mui/icons-material/CancelOutlined';
 // import EventAvailableTwoToneIcon from '@mui/icons-material/EventAvailableTwoTone';
 import api from '/src/api.jsx'
+import noBooking from '/src/components/noBooking.jsx';
 
 export default function AlertDialog() {
   const [open, setOpen] = useState(false);
   const student_info_id = localStorage.getItem('student_info_id')
   const [allId, setAllId] = useState([]);
   const [allStatus, setAllStatus] = useState([]);
-  const [bookingTime, setBookingTime] = useState({startTime: '', endTime: ''})
+  const [bookingTime, setBookingTime] = useState({ startTime: '', endTime: '' })
   // const [indexUser, setIndexUser] = useState()
-  const [statusConfirm,setStatusConfirm] = useState(undefined);
+  const [statusConfirm, setStatusConfirm] = useState(undefined);
   const [showMessage, setShowMessage] = useState(false); // ใช้สำหรับแสดงข้อความ "No booking today"
   const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
   // API : get /booking/user
   useEffect(() => {
     const userBooking = async () => {
-       try {
+      try {
         const response = await api.get(`/booking/user?user_id=${student_info_id}`);
         if (response.status === 200) {
           setBookingTime({
@@ -46,28 +47,35 @@ export default function AlertDialog() {
           if (index !== -1) {
             setStatusConfirm(statuses[index]);
           }
+
+          console.log("sesponse status = 200");
+
         } else if (response.status === 400) {
-          setShowMessage(true);
+          // setShowMessage(true);
+          <noBooking />
+
+          console.log("sesponse status = 400");
+
         }
-       } catch (error) {
+      } catch (error) {
         console.error("An error occurred: ", error);
-       }
+      }
     };
     userBooking();
   }, [student_info_id]);
 
   const isHost = student_info_id === allId[0]?.toString(); // ตรวจสอบว่า user_id ตรงกับ host_id หรือไม่
 
-    // setAllId([response.data.host_id
-    //   ,response.data.friend_id1
-    //   ,response.data.friend_id2
-    //   ,response.data.friend_id3])
-    // setAllStatus([response.data.confirmation_host
-    //   ,response.data.confirmation1
-    //   ,response.data.confirmation2
-    //   ,response.data.confirmation3])
-    // setIndexUser(allId.indexOf(parseInt(student_info_id)))
-    // setStatusComfirm(allStatus[indexUser])
+  // setAllId([response.data.host_id
+  //   ,response.data.friend_id1
+  //   ,response.data.friend_id2
+  //   ,response.data.friend_id3])
+  // setAllStatus([response.data.confirmation_host
+  //   ,response.data.confirmation1
+  //   ,response.data.confirmation2
+  //   ,response.data.confirmation3])
+  // setIndexUser(allId.indexOf(parseInt(student_info_id)))
+  // setStatusComfirm(allStatus[indexUser])
 
   const handleConfirm = async () => {
     try {
@@ -107,13 +115,13 @@ export default function AlertDialog() {
     setOpen(false);
   };
 
-  const createDate = (timeJSON) =>{
+  const createDate = (timeJSON) => {
     const event = new Date(timeJSON)
     // console.log('Hours: ',event.getHours());
     // console.log(event);
     return event
   }
-    
+
 
   return (
     <React.Fragment>
@@ -126,64 +134,69 @@ export default function AlertDialog() {
         onClose={handleClose}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
-        
+
       >
         <div className='mybooking'>
           <div className="mybooking-inner">
             <DialogActions className='close-ctn'>
-              <CancelOutlinedIcon onClick={handleClose} className='close-btn'/>
+              <CancelOutlinedIcon onClick={handleClose} className='close-btn' />
             </DialogActions>
-            
+
             <div className='title'>
-            {"My Booking"}
+              {"My Booking"}
             </div>
-            <div>
-              <div  className='booking-info' id='booking-info'>
-                <div id="description-Date">
-                  <div>{createDate(bookingTime.startTime).getDate()}</div>
-                  <div>{months[createDate(bookingTime.startTime).getMonth()]}</div>
+
+            {/* แสดงข้อความ "No booking today" เมื่อ showMessage เป็น true */}
+            {showMessage && <div>No booking today</div>}
+
+            {/* แสดงข้อมูลการจอง */}
+            {!showMessage && (
+              <div>
+                <div className='booking-info' id='booking-info'>
+                  <div id="description-Date">
+                    <div>{createDate(bookingTime.startTime).getDate()}</div>
+                    <div>{months[createDate(bookingTime.startTime).getMonth()]}</div>
+                  </div>
+                </div>
+
+                <div id="description" className='booking-info'>
+
+                  <div className='context'>
+                    <LocationOnOutlinedIcon sx={{ fontSize: 30 }} />
+                    <div>TSE Co-Working Space</div>
+                  </div>
+                  <div className='context'>
+                    <AccessAlarmsOutlinedIcon sx={{ fontSize: 30 }} />
+                    <div className="time-context">{createDate(bookingTime.startTime).getHours()}.00 -
+                      {createDate(bookingTime.endTime).getHours()}.00น. </div>
+                  </div>
                 </div>
               </div>
-              
-              <div id="description" className='booking-info'>
+            )}
 
-                <div className='context'>
-                <LocationOnOutlinedIcon sx={{ fontSize: 30}} />
-                <div>TSE Co-Working Space</div>
+            {/* ปุ่มยืนยันการจองและยกเลิก */}
+            {!showMessage && (
+              <div id='btn-group'>
+                {/* {isHost && (
+                  <Button className='cancle-btn btn' onClick={handleCancel}>Cancle</Button>
+                )}
+              <Button className='confirm-btn btn' onClick={handleConfirm} autoFocus> Confirm</Button> */}
+                {!statusConfirm && ( // แสดงปุ่มเฉพาะเมื่อ statusConfirm เป็น false
+                  <React.Fragment>
+                    {isHost && (
+                      <Button className='cancle-btn' onClick={handleCancel}>Cancel</Button>
+                    )}
+                    <Button className='confirm-btn' onClick={handleConfirm} autoFocus> Confirm</Button>
+                  </React.Fragment>
+                )}
+                {statusConfirm && ( // แสดงข้อความเฉพาะเมื่อ statusConfirm เป็น true
+                  <div>Confirmed successfully</div>
+                )}
               </div>
-              <div className='context'> 
-                <AccessAlarmsOutlinedIcon sx={{ fontSize: 30}} />
-                <div className="time-context">{createDate(bookingTime.startTime).getHours()}.00 - 
-                {createDate(bookingTime.endTime).getHours()}.00น. </div>
-                </div> 
-              </div>
-            </div>
-              
-
-            <div id='btn-group'>
-              {/* {isHost && (
-                <Button className='cancle-btn btn' onClick={handleCancel}>Cancle</Button>
-              )}
-            <Button className='confirm-btn btn' onClick={handleConfirm} autoFocus> Confirm</Button> */}
-              {!statusConfirm && ( // แสดงปุ่มเฉพาะเมื่อ statusConfirm เป็น false
-                <React.Fragment>
-                  {isHost && (
-                    <Button className='cancle-btn' onClick={handleCancel}>Cancel</Button>
-                  )}
-                  <Button className='confirm-btn' onClick={handleConfirm} autoFocus> Confirm</Button>
-                </React.Fragment>
-              )}
-              {statusConfirm && ( // แสดงข้อความเฉพาะเมื่อ statusConfirm เป็น true
-                <div>Confirmed successfully</div>
-              )}
-            </div>
+            )}
           </div>
-          
-          
         </div>
-
       </Dialog>
-        
     </React.Fragment>
   );
 }
