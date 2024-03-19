@@ -1,15 +1,22 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import '/src/styles/LoginPage.css';
 import HeadPic from '/src/assets/vidvabuilding.jpg';
 import LogoPic from '/src/assets/EnBookingLogo.jpeg'
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+import TextField from '@mui/material/TextField';
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import { Password } from 'primereact/password';
+        
 import api from '/src/api.jsx'
 
 const LoginForm = () => {
   const [student_info_id, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
+
 
   const handleLogin = async (event) => {
     event.preventDefault();
@@ -21,7 +28,9 @@ const LoginForm = () => {
     };
 
     console.log(loginData);
+    // useEffect(() => {
 
+    // },[]);
     // ตรวจสอบการ log in กับ backend
     try {
       const response = await api.get(`/signup/log_in?users_id=${student_info_id}&password=${password}`, loginData)
@@ -72,20 +81,25 @@ const LoginForm = () => {
               <div className="input-box2">
                 <input
                   type="text"
+                  className='input-pwd'
+                  name="input-pwd"
                   placeholder='Password'
                   required
                   value={password}
                   minLength={8}
                   maxLength={24}
                   onChange={(e) => setPassword(e.target.value)}
+                  autoComplete="current-password"
                 />
+                
+                 
               </div>
 
               <div className="forgot">
                 <p>Do not have an account? <Link to="/signup">Click here to sign up</Link> </p>
               </div>
 
-              <button type='submit'>Sign In</button>
+              <button className='submit-btn'type='submit'>Sign In</button>
             </div>
 
         </form>

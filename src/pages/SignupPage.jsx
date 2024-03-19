@@ -148,7 +148,7 @@ const SignupForm = () => {
                 {errors.year && <p>{errors.year}</p>}
 
                 <input
-                type="text"
+                type="password"
                 name="password"
                 placeholder='Password'
                 required
