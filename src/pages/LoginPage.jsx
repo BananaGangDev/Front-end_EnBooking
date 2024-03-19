@@ -88,7 +88,7 @@ const LoginForm = () => {
 
           <div className="input-box2">
             <input
-              type="text"
+              type="password"
               className="input-pwd"
               name="input-pwd"
               placeholder="Password"
